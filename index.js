@@ -1,6 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+
+const mongo = require('mongodb');
+const mongoose = require('mongoose');
+
 const app = express();
 
 // Basic Configuration
@@ -15,8 +19,10 @@ app.get('/', function(req, res) {
 });
 
 // Your first API endpoint
-app.get('/api/hello', function(req, res) {
-  res.json({ greeting: 'hello API' });
+app.get('/api/shorturl', (req, res) => {
+  const original_url = `${req.protocol}://${req.hostname}`;
+
+  res.json({ original_url, short_url: 'shorturl' });
 });
 
 app.listen(port, function() {
